@@ -43,25 +43,27 @@ url0 = 'http://codeatsix.infinum.hr:80'
 # reference to the HTTPRequest with an instrumented version.
 # You can access the unadorned instance using request101.__target__.
 request101 = HTTPRequest(url=url0, headers=headers0)
-request101 = Test(101, 'GET /').wrap(request101)
+#request101 = Test(101, 'GET /').wrap(request101)
 
 request102 = HTTPRequest(url=url0, headers=headers1)
-request102 = Test(102, 'GET application-c35bf8b70dcd468d7da6ef3f7ffbbfbf.css').wrap(request102)
+#request102 = Test(102, 'GET application-c35bf8b70dcd468d7da6ef3f7ffbbfbf.css').wrap(request102)
 
 request103 = HTTPRequest(url=url0, headers=headers2)
-request103 = Test(103, 'GET application-8b5601a04076b23a7aeac3b8993f6825.js').wrap(request103)
+#request103 = Test(103, 'GET application-8b5601a04076b23a7aeac3b8993f6825.js').wrap(request103)
 
 request104 = HTTPRequest(url=url0, headers=headers2)
-request104 = Test(104, 'GET modernizr-6cacb47520d952f832018bc1610e5e0c.js').wrap(request104)
+#request104 = Test(104, 'GET modernizr-6cacb47520d952f832018bc1610e5e0c.js').wrap(request104)
 
 request105 = HTTPRequest(url=url0, headers=headers3)
-request105 = Test(105, 'GET banner2-002664d054138b6c5f2ffe64f2e3ce04.png').wrap(request105)
+#request105 = Test(105, 'GET banner2-002664d054138b6c5f2ffe64f2e3ce04.png').wrap(request105)
 
 request106 = HTTPRequest(url=url0, headers=headers3)
-request106 = Test(106, 'GET gmaps-1e5b6bbecee2b934617b11b1f9820777.png').wrap(request106)
+#request106 = Test(106, 'GET gmaps-1e5b6bbecee2b934617b11b1f9820777.png').wrap(request106)
 
 request107 = HTTPRequest(url=url0, headers=headers4)
-request107 = Test(107, 'GET favicon.ico').wrap(request107)
+#request107 = Test(107, 'GET favicon.ico').wrap(request107)
+
+log = grinder.logger.info
 
 
 class TestRunner:
@@ -70,7 +72,10 @@ class TestRunner:
   # A method for each recorded page.
   def page1(self):
     """GET / (requests 101-107)."""
-    result = request101.GET('/')
+    result = request101.GET('/a')
+
+    if result.getStatusCode() != 200:
+        raise ValueError
 
     grinder.sleep(45)
     request102.GET('/assets/application-c35bf8b70dcd468d7da6ef3f7ffbbfbf.css')

@@ -1,0 +1,8 @@
+0. load testiranje, kapacitet, duration
+1. objasni *.sh od grindera
+2. namjesti firefox na grinder proxy
+3. pokreni proxy
+4. u firefoxu idi na codeatsix.infinum.hr
+5. otvori grinder.py
+6. grinder properties objasni
+7. pokazi kako se detektira fail ocekujuci 403

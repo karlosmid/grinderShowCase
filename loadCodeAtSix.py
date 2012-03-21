@@ -7,6 +7,7 @@ from net.grinder.plugin.http import HTTPPluginControl, HTTPRequest
 from HTTPClient import NVPair
 connectionDefaults = HTTPPluginControl.getConnectionDefaults()
 httpUtilities = HTTPPluginControl.getHTTPUtilities()
+connectionDefaults.useContentEncoding = 1
 
 # To use a proxy server, uncomment the next line and set the host and port.
 # connectionDefaults.setProxyServer("localhost", 8001)
@@ -72,10 +73,13 @@ class TestRunner:
   # A method for each recorded page.
   def page1(self):
     """GET / (requests 101-107)."""
-    result = request101.GET('/a')
+    result = request101.GET('/')
 
     if result.getStatusCode() != 200:
         raise ValueError
+
+    log(str(result.toString()))
+    log(str(result.getText()))
 
     grinder.sleep(45)
     request102.GET('/assets/application-c35bf8b70dcd468d7da6ef3f7ffbbfbf.css')
